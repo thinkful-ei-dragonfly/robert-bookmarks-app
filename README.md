@@ -1,2 +1,2 @@
 # bookmark-app-project-local
-Local repo to house work for bookmark application - capstone project
+started work in local repo (@RobertWiggins) and mirror pushed to this repository housed in thinkful-ei-dragonfly after 8-9 commits
