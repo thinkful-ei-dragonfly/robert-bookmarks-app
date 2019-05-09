@@ -1,14 +1,14 @@
-// global $
+// $ global, global bookmarkList FIX
 
 'use strict';
 
 $(function() {
   bookmarkList.bindEventListeners();
-  bookmarkList.render(); 
+  bookmarkList.render();
   
   // TEST API, store, here etc.
-
   
+
 });
 
 
