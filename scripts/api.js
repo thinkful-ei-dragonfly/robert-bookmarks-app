@@ -65,16 +65,26 @@ const api = (function() {
   function getBookmarks() {
     // The get URL just requires the base url + /bookmarks, which is already done in the constant above
     return fetchHandler(BASE_URL);
-
   }
 
   // creating a new item (POST) requires a request body
   // params: 
+  // title, string, required
+  // url, string, required min 5 length and include protocol (http/https)
+  // desc	string, optional Min 1 length
+  // rating, number, optional between 1 and 5
   function createBookmarks() {
     
+    const headersObj = new Headers( 
+      'content-type' : 'application/json',
+      
+    ) 
+    JSON.stringify(body);
   }
 
-
+  /**
+   * Delete requires a matching id parameter in the format i.e. /bookmarks/8sdfbvbs65sd
+   */
   function deleteBookmarks() {
     
   }
