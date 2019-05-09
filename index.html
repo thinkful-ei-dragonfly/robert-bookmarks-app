@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bookmark List</title>
+</head>
+<body>
+  <div class="main">
+
+    <h1>Your bookmarks</h1>
+
+    <h3>Add bookmark:</h3>
+
+    <form id="js-user-input" action="submit">
+
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="js-title-input" required>
+
+      <label for="url">Hyperlink:</label>
+      <input type="text" name="url" id="js-hyperlink-input" required>
+
+      <label for="description">Information:</label>
+      <input type="text" name="description" id="js-description-input" required>
+
+      <label for="rating">Rating (1-5):</label>
+      <input type="number" name="rating" id="js-rating-input" required>
+
+      <input type="submit" value="Add bookmark to list!">
+    </form>
+
+  <section class="results">
+    <ul id="js-bookmark-results"></ul>
+  </section>
+
+  </div>
+
+</body>
+</html>
