@@ -67,6 +67,8 @@ const api = (function() {
     return fetchHandler(BASE_URL);
   }
 
+
+
   // creating a new item (POST) requires a request body
   // params: 
   // title, string, required
@@ -97,11 +99,11 @@ const api = (function() {
 
     // THIS IS A TEST
     // eslint-disable-next-line no-undef
-    return store.addBookmark( fetchHandler( postBookmarkURL, {
+    return fetchHandler( postBookmarkURL, {
       method : 'POST',
       headers : headersObj,
       body,
-    } ) );
+    } );
   }
 
 
@@ -117,8 +119,7 @@ const api = (function() {
     try {
       fetchHandler(BASE_URL + '/' + id, { method: 'DELETE' });
       // eslint-disable-next-line no-undef
-      store.findAndDelete(id);
-    // eslint-disable-next-line no-undef
+    // eslint-disable-next-line no-undef` 
     } catch (e) {
       console.log(e.message);
     }
