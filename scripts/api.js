@@ -5,7 +5,7 @@
 const api = (function() {
   
   // base URL for bookmarks server end point
-  const BASE_URL = "https://thinkful-list-api.herokuapp.com/robertw/bookmarks";
+  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/robertw/bookmarks';
 
   // returns a parsed json if fetch is valid, otherwise standardizes the handling of errors for all requests 
   function fetchHandler(...params) {
@@ -73,20 +73,49 @@ const api = (function() {
   // url, string, required min 5 length and include protocol (http/https)
   // desc	string, optional Min 1 length
   // rating, number, optional between 1 and 5
-  function createBookmarks() {
+  function createBookmark() {
     
-    const headersObj = new Headers( 
+    // ^^ will probably need to take a Bookmark parameter and then extract out Id to append to url
+
+    // JSON.stringify(body);
+
+    // input 
+    const headersObj = new Headers( {
       'content-type' : 'application/json',
-      
-    ) 
-    JSON.stringify(body);
+    } );
+     
+    
+    
+    const postBookmarkURL = BASE_URL + '/' + '8sdfbvbs65sd';
+
+    const body = {
+      'title' : 'test1',
+      'rating' : '4',
+      'desc' : 'description1',
+      'link' : 'https://test1.com', 
+    };
+
+    
+
+    // THIS IS A TEST
+    return fetchHandler( postBookmarkURL, {
+      method : 'POST',
+      'headers' : headersObj,
+      body,
+    } );
   }
+
+
 
   /**
    * Delete requires a matching id parameter in the format i.e. /bookmarks/8sdfbvbs65sd
    */
-  function deleteBookmarks() {
-    
+  function deleteBookmark() { 
+  
+    // TEST ID
+    const id = '8sdfbvbs65sd';
+
+    return fetchHandler(BASE_URL + '/' + id);
   }
 
   
