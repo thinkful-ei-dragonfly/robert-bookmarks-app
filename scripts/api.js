@@ -73,7 +73,7 @@ const api = (function() {
   // url, string, required min 5 length and include protocol (http/https)
   // desc	string, optional Min 1 length
   // rating, number, optional between 1 and 5
-  function createBookmark() {
+  function createBookmark(title, rating, desc, url) {
     
     // ^^ will probably need to take a Bookmark parameter and then extract out Id to append to url
 
@@ -84,42 +84,47 @@ const api = (function() {
       'content-type' : 'application/json',
     } );
      
-    
-    
-    const postBookmarkURL = BASE_URL + '/' + '8sdfbvbs65sd';
+    const postBookmarkURL = BASE_URL;
 
-    const body = {
-      'title' : 'test1',
-      'rating' : '4',
-      'desc' : 'description1',
-      'link' : 'https://test1.com', 
+    const sendBody = {
+      title,
+      rating,
+      desc,
+      url, 
     };
 
-    
+    const body = JSON.stringify(sendBody);
 
     // THIS IS A TEST
-    return fetchHandler( postBookmarkURL, {
+    // eslint-disable-next-line no-undef
+    return store.addBookmark( fetchHandler( postBookmarkURL, {
       method : 'POST',
-      'headers' : headersObj,
+      headers : headersObj,
       body,
-    } );
+    } ) );
   }
 
 
 
   /**
    * Delete requires a matching id parameter in the format i.e. /bookmarks/8sdfbvbs65sd
+   * 
+   * !!!  NEED TO RECEIVE ID FROM bookmarkList.js which it listens for when user presses delete !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    */
-  function deleteBookmark() { 
-  
-    // TEST ID
-    const id = '8sdfbvbs65sd';
+  function deleteBookmark(id) { 
 
-    return fetchHandler(BASE_URL + '/' + id);
+    // ALL I NEED?? IS THIS GOING TO CORRECTLY DELETE FROM STORE?
+    try {
+      fetchHandler(BASE_URL + '/' + id, { method: 'DELETE' });
+      // eslint-disable-next-line no-undef
+      store.findAndDelete(id);
+    // eslint-disable-next-line no-undef
+    } catch (e) {
+      console.log(e.message);
+    }
+
+  
   }
-
-  
-
   // shouldnt need updateBookmark() due to no edit functionality
   return {
     getBookmarks,
