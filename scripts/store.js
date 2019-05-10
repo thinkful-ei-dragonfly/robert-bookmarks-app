@@ -5,66 +5,74 @@
 
 
 // eslint-disable-next-line no-unused-vars
-// const store = (function(){
+const store = (function(){
 
-//   // add Bookmark to local state version of bookmarks[]
-//   // Bookmark.createBookmark() delegated
-//   const addBookmark = function(dataResponse) {
-//     console.log(dataResponse);
-//     try {
-//       // Bookmark.validateName(name);
-//       this.bookmarks.push( Bookmark.createBookmark(
-//         dataResponse.id,
-//         dataResponse.title,
-//         dataResponse.rating,
-//         dataResponse.url,
-//         dataResponse.desc ) );
-//       console.log(dataResponse.id);
-//       console.log(this.bookmarks);
-//     } catch(e) {
-//       console.log(e.message);
-//     }
-//   };
+  // add Bookmark to local state version of bookmarks[]
+  // Bookmark.createBookmark() delegated
+  const addBookmark = function(dataResponse) {
+    
+    try {
+      // Bookmark.validateName(name);
+      // taken from a call from bookmarkList to add bookmark
+      // which had already called the api createBookmark
+      this.bookmarks.push( {
+        id : dataResponse.id,
+        title : dataResponse.title,
+        rating: dataResponse.rating,
+        url: dataResponse.url,
+        desc: dataResponse.desc,
+        isDisplayDetailed: false } );
 
-//   const findById = function(id) {
-//     return this.bookmarks.find(bookmark => bookmark.id === id);
-//   };
+    } catch(e) {
+      console.log(e.message);
+    }
+  };
 
-//   const findAndToggleDetailed = function(id) {
-//     const bookmark = this.findById(id);
-//     bookmark.checked = !bookmark.checked;
-//   };
+  const findById = function(id) {
+    return this.bookmarks.find(bookmark => bookmark.id === id);
+  };
 
-//   const findAndDelete = function(id) {
-//     this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
-//   };
+  const findAndToggleDetailed = function(id) {
+    const bookmark = this.findById(id);
+    bookmark.isDetailed = !bookmark.isDetailed;
+  };
 
-//   // MIGHT NOT NEED
-//   // const findAndUpdateName = function(id, name) {
-//   //   try {
-//   //     Bookmark.validateBookmarkLegality(name);
-//   //     const bookmark = this.findById(id);
-//   //     bookmark.name = name;
-//   //   } catch(e) {
-//   //     console.log('Cannot update title: ' + e.message);
-//   //   }
-//   // };
+  const findAndDelete = function(id) {
+    this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
+  };
 
-//   // const setBookmarkIsEditing = function(id, isEditing) {
-//   //   const bookmark = this.findById(id);
-//   //   bookmark.isEditing = isEditing;
-//   // };
+  const setError = function(errorMessage) {
+    this.error = errorMessage;
+  };
 
-//   return {
-//     bookmarks: [],
-//     isDetailed: false,
+  // MIGHT NOT NEED
+  // const findAndUpdateName = function(id, name) {
+  //   try {
+  //     Bookmark.validateBookmarkLegality(name);
+  //     const bookmark = this.findById(id);
+  //     bookmark.name = name;
+  //   } catch(e) {
+  //     console.log('Cannot update title: ' + e.message);
+  //   }
+  // };
 
-//     addBookmark,
-//     findById,
-//     findAndToggleDetailed,
-//     findAndDelete,
-//     // findAndUpdateName,
-//     // setBookmarkIsEditing,
-//   };
+  // const setBookmarkIsEditing = function(id, isEditing) {
+  //   const bookmark = this.findById(id);
+  //   bookmark.isEditing = isEditing;
+  // };
+
+  return {
+    bookmarks: [],
+    isDetailed: false,
+    error : null,      // NEED TO DEFINE THIS
+    filterValue: '0',    // NEED TO CREATE A DEFINE/TOGGLE ENTRY ON THIS
+
+    addBookmark,
+    findById,
+    findAndToggleDetailed,
+    findAndDelete,
+    // findAndUpdateName,
+    // setBookmarkIsEditing,
+  };
   
-// }());
+}());

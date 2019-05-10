@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // $ global, global bookmarkList FIX
 
 'use strict';
@@ -8,7 +9,4 @@ $(function() {
   
   // TEST API, store, here etc.
   
-
 });
-
-

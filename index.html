@@ -18,7 +18,7 @@
     </form>
     
 
-    <form class="hidden" id="myForm" name="input-form" action="submit">
+    <form class="hidden" id="js-myForm" name="input-form" action="submit">
 
       <label for="title">Title:</label>
       <input type="text" name="title" id="js-title-input" required>
@@ -27,7 +27,7 @@
       <input type="text" name="url" id="js-hyperlink-input" required>
 
       <label for="description">Information:</label>
-      <input type="text" name="description" id="js-description-input" required>
+      <input type="text" name="desc" id="js-description-input" required>
 
       <select name="rating" id="js-rating" required>
        <option value="0">Rating</option>
@@ -41,7 +41,8 @@
       <input type="submit" value="Add bookmark to list!">
     </form>
 
-    <select name="filter-rating" id="js-rating" required>
+    <form id="js-filter-rating" action="submit">
+    <select name="filterRating" id="js-rating" required>
       <option value="0">Filter by rating</option>
       <option value="1">1 star</option>
       <option value="2">2 stars</option>
@@ -49,9 +50,10 @@
       <option value="4">4 stars</option>
       <option value="5">5 stars</option>
      </select>
+    </form>
 
   <section class="results">
-    <ul id="js-bookmark-results">
+    <ul id="js-bookmark-list">
       <ul><h4>Title 1</h4>
         <li>rating</li>
         <li class="hidden">description</li>
@@ -66,8 +68,8 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="scripts/Bookmark.js"></script>
   <script type="text/javascript" src="scripts/store.js"></script>
-  <script type="text/javascript" src="scripts/bookmarkList.js"></script>
   <script type='text/javascript' src='scripts/api.js'></script>
+  <script type="text/javascript" src="scripts/bookmarkList.js"></script>
   <script type="text/javascript" src="scripts/index.js"></script>
 </body>
 </html>

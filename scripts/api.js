@@ -5,7 +5,7 @@
 const api = (function() {
   
   // base URL for bookmarks server end point
-  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/robertw/bookmarks';
+  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/robertwnewtry/bookmarks';
 
   // returns a parsed json if fetch is valid, otherwise standardizes the handling of errors for all requests 
   function fetchHandler(...params) {
