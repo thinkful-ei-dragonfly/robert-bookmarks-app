@@ -5,8 +5,18 @@
 
 $(function() {
   bookmarkList.bindEventListeners();
-  bookmarkList.render();
+
+  api.getBookmarks()
+    .then((bookmarks) => {
+      bookmarks.forEach((bookmark) => {
+        store.addBookmark(bookmark);
+      });
+      bookmarkList.render();
+    })
+    .catch(error => console.log(error.message));
+
+  // bookmarkList.render();
   
-  // TEST API, store, here etc.
+  // perhaps TEST API, store, here etc.
   
 });
