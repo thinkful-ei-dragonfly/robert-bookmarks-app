@@ -21,7 +21,8 @@ const store = (function(){
         rating: dataResponse.rating,
         url: dataResponse.url,
         desc: dataResponse.desc,
-        isDisplayDetailed: false } );
+        isDisplayDetailed: false, 
+      } );
 
     } catch(e) {
       console.log(e.message);

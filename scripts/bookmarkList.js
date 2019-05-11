@@ -18,12 +18,14 @@ const bookmarkList = (function(){
     `;
   }
 
+  let expandButton = '<button class="js-expand-button">Expand Details</button>';
+  let deleteButton = '<button class="js-delete-button">Delete</button>';
+
   function generateBookmarkElement(bookmark) {
     const hiddenClass = bookmark.isDetailed ? 'bookmark-detailed__hidden' : '';
     const detailedBtnStatus = bookmark.isDisplayDetailed ? 'disabled' : '';
 
-    let bookmarkTitle = `<span class="bookmark-title ${hiddenClass}">${bookmark.title}</span>`;
-    let bookmarkString = '<div class="bookmark-container>';
+    let bookmarkString = `<div class="bookmark-container" data-bookmark-id="${bookmark.id}">`;
     if (bookmark.isDisplayDetailed) {
       bookmarkString +=
         `<li class="js-detailed-bookmark">
@@ -31,8 +33,7 @@ const bookmarkList = (function(){
           <p>${bookmark.rating}</p>
           <p>${bookmark.desc}</p>
           <p>${bookmark.url}</p>
-        </li>
-      `;
+        </li>`;
     } else {
       bookmarkString += 
           `<li class="js-undetailed-bookmark">
@@ -42,23 +43,26 @@ const bookmarkList = (function(){
     }
 
     // changed bookmark-controls to form
-  
-    return bookmarkString +=
-    ` <li class="js-bookmark-element" data-bookmark-id="${bookmark.id}">
-        ${bookmarkTitle}
-        <form class="js-bookmark-controls">
-          <button class="bookmark-toggle js-bookmark-toggle ${detailedBtnStatus}">
-            <span class="button-label">Display detailed</span>
-          </button>
-          <button class="bookmark-toggle js-bookmark-toggle">
-            <span class="button-label">Display detailed</span>
-          </button>
-          <button class="bookmark-delete js-bookmark-delete">
-            <span class="button-label">Delete</span>
-          </button>
-        </form>
-      </li> 
-    </div>`;
+    bookmarkString += `<div class="js-bookmark-buttons" data-bookmark-id="${bookmark.id}">`;
+    bookmarkString += expandButton; 
+    bookmarkString += deleteButton;
+    bookmarkString += '</div>';
+    return bookmarkString += '</div>';
+
+    //  `<form class="js-buttons" data-bookmark-id="${bookmark.id}">
+        
+    //       <button class="bookmark-toggle js-bookmark-toggle ${detailedBtnStatus}" data-bookmark-id="${bookmark.id}">
+    //         <span class="button-label">Display detailed</span>
+    //       </button>
+        
+        
+        
+    //       <button class="bookmark-delete js-bookmark-delete" data-bookmark-id="${bookmark.id}">
+    //         <span class="button-label">Delete</span>
+    //       </button>
+        
+    //   </form> 
+    // </div>`;
   }
   
   
@@ -121,32 +125,44 @@ const bookmarkList = (function(){
     });
   }
   
-  function getBookmarkIdFromElement(bookmark) {
-    return $(bookmark)
-      .closest('.js-bookmark-element')
-      .data('data-bookmark-id');
-  }
-  
+  //OLD TRY
+  // function getBookmarkIdFromElement(bookmark) {
+  //   return $(bookmark)
+  //     .closest('.js-buttons')
+  //     .data('data-bookmark-id');
+  // }
+
+  // NEW TRY GET BOOKMARK ID TRY DOESNT CALL INNER FIND________________________ 
   function handleToggleDetailed() {
-    $('.js-bookmark-controls').on('click', '.js-bookmark-toggle', event => {
-      const id = getBookmarkIdFromElement(event.currentTarget); //NECESSARY??
-      const bookmark = store.findById(id); // THIS GETS THE ACTUAL ITEM - NOT USED RIGHT NOW
+    $('.js-bookmark-list').on('click', '.js-expand-button', event => {
+      const id = $(event.currentTarget).closest('.js-bookmark-buttons').attr('data-bookmark-id');
+      console.log(id);
       store.findAndToggleDetailed(id);
       render();
     });
-    // .catch((err) => { // THIS SHOULDNT HAPPEN BECAUSE NOT CALLING API
-    //   console.log(err);
-    //   store.setError(err.message);
-    //   renderError();
-    // }
-    // );
   }
+  
+  // function handleToggleDetailed() {
+  //   $('.js-buttons').on('submit', '.js-bookmark-toggle', event => {
+  //     const id = getBookmarkIdFromElement(event.currentTarget); //NECESSARY??
+  //     const bookmark = store.findById(id); // THIS GETS THE ACTUAL ITEM - NOT USED RIGHT NOW
+  //     store.findAndToggleDetailed(id);
+  //     render();
+  //   });
+  //   .catch((err) => { // THIS SHOULDNT HAPPEN BECAUSE NOT CALLING API
+  //     console.log(err);
+  //     store.setError(err.message);
+  //     renderError();
+  //   }
+  //   );
+  // }
     
   
   function handleDeleteBookmarkClicked() {
-    $('.js-bookmark-controls').on('click', '.js-bookmark-delete', event => {
-      const id = getBookmarkIdFromElement(event.currentTarget);   // PREVENT DEFAULT??
-
+    $('.js-bookmark-list').on('click', '.js-delete-button', event => {
+      const id = $(event.currentTarget).closest('.js-bookmark-buttons').attr('data-bookmark-id');
+      console.log('delete ' + id);
+      console.log('delete registered');
       api.deleteBookmark(id)
         .then(() => {
           store.findAndDelete(id);
