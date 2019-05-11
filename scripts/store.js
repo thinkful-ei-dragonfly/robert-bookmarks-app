@@ -34,7 +34,7 @@ const store = (function(){
 
   const findAndToggleDetailed = function(id) {
     const bookmark = this.findById(id);
-    bookmark.isDetailed = !bookmark.isDetailed;
+    bookmark.isDisplayDetailed = !bookmark.isDisplayDetailed;
   };
 
   const findAndDelete = function(id) {
@@ -63,10 +63,11 @@ const store = (function(){
 
   return {
     bookmarks: [],
-    isDetailed: false,
+    isDisplayDetailed: false,
     error : null,      // NEED TO DEFINE THIS
     filterValue: '0',    // NEED TO CREATE A DEFINE/TOGGLE ENTRY ON THIS
 
+    setError,
     addBookmark,
     findById,
     findAndToggleDetailed,

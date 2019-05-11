@@ -20,22 +20,34 @@ const bookmarkList = (function(){
 
   function generateBookmarkElement(bookmark) {
     const hiddenClass = bookmark.isDetailed ? 'bookmark-detailed__hidden' : '';
-    const detailedBtnStatus = bookmark.isDetailed ? 'disabled' : '';
+    const detailedBtnStatus = bookmark.isDisplayDetailed ? 'disabled' : '';
 
     let bookmarkTitle = `<span class="bookmark-title ${hiddenClass}">${bookmark.title}</span>`;
-    if (bookmark.isDetailed) {
-      bookmarkTitle = `
-        <form class="js-detailed-bookmark">
-          <input class="bookmark-title type="text" value="${bookmark.title}" />
-        </form>
+    let bookmarkString = '<div class="bookmark-container>';
+    if (bookmark.isDisplayDetailed) {
+      bookmarkString +=
+        `<li class="js-detailed-bookmark">
+          <p>${bookmark.title}</p>
+          <p>${bookmark.rating}</p>
+          <p>${bookmark.desc}</p>
+          <p>${bookmark.url}</p>
+        </li>
       `;
+    } else {
+      bookmarkString += 
+          `<li class="js-undetailed-bookmark">
+            <p>${bookmark.title}</p>
+            <p>${bookmark.rating}</p>
+          </li>`;
     }
+
+    // changed bookmark-controls to form
   
-    return `
-      <li class="js-bookmark-element" data-bookmark-id="${bookmark.id}">
+    return bookmarkString +=
+    ` <li class="js-bookmark-element" data-bookmark-id="${bookmark.id}">
         ${bookmarkTitle}
-        <div class="bookmark-controls">
-          <button class="bookmark-detailed js-bookmark-detailed" ${detailedBtnStatus}>
+        <form class="js-bookmark-controls">
+          <button class="bookmark-toggle js-bookmark-toggle ${detailedBtnStatus}">
             <span class="button-label">Display detailed</span>
           </button>
           <button class="bookmark-toggle js-bookmark-toggle">
@@ -44,8 +56,9 @@ const bookmarkList = (function(){
           <button class="bookmark-delete js-bookmark-delete">
             <span class="button-label">Delete</span>
           </button>
-        </div>
-      </li>`;
+        </form>
+      </li> 
+    </div>`;
   }
   
   
@@ -111,11 +124,11 @@ const bookmarkList = (function(){
   function getBookmarkIdFromElement(bookmark) {
     return $(bookmark)
       .closest('.js-bookmark-element')
-      .data('bookmark-id');
+      .data('data-bookmark-id');
   }
   
   function handleToggleDetailed() {
-    $('.js-bookmark-list').on('click', '.js-bookmark-toggle', event => {
+    $('.js-bookmark-controls').on('click', '.js-bookmark-toggle', event => {
       const id = getBookmarkIdFromElement(event.currentTarget); //NECESSARY??
       const bookmark = store.findById(id); // THIS GETS THE ACTUAL ITEM - NOT USED RIGHT NOW
       store.findAndToggleDetailed(id);
@@ -131,7 +144,7 @@ const bookmarkList = (function(){
     
   
   function handleDeleteBookmarkClicked() {
-    $('.js-bookmark-list').on('click', '.js-bookmark-delete', event => {
+    $('.js-bookmark-controls').on('click', '.js-bookmark-delete', event => {
       const id = getBookmarkIdFromElement(event.currentTarget);   // PREVENT DEFAULT??
 
       api.deleteBookmark(id)
