@@ -18,11 +18,13 @@ const bookmarkList = (function(){
     `;
   }
 
-  let expandButton = '<button class="js-expand-button">Expand Details</button>';
-  let deleteButton = '<button class="js-delete-button">Delete</button>';
+  
 
   function generateBookmarkElement(bookmark) {
-    const hiddenClass = bookmark.isDetailed ? 'bookmark-detailed__hidden' : '';
+    // let expandState = 'Expand details';
+    let expandButton = '<button class="js-expand-button">Details</button>';
+    let deleteButton = '<button class="js-delete-button">Delete</button>';
+
     const detailedBtnStatus = bookmark.isDisplayDetailed ? 'disabled' : '';
 
     let bookmarkString = `<div class="bookmark-container" data-bookmark-id="${bookmark.id}">`;
@@ -30,7 +32,7 @@ const bookmarkList = (function(){
       bookmarkString +=
         `<li class="js-detailed-bookmark">
           <p>${bookmark.title}</p>
-          <p>${bookmark.rating}</p>
+          <p>${bookmark.rating} Star</p>
           <p>${bookmark.desc}</p>
           <p>${bookmark.url}</p>
         </li>`;
@@ -38,13 +40,13 @@ const bookmarkList = (function(){
       bookmarkString += 
           `<li class="js-undetailed-bookmark">
             <p>${bookmark.title}</p>
-            <p>${bookmark.rating}</p>
+            <p>${bookmark.rating} Star</p>
           </li>`;
     }
 
     // changed bookmark-controls to form
     bookmarkString += `<div class="js-bookmark-buttons" data-bookmark-id="${bookmark.id}">`;
-    bookmarkString += expandButton; 
+    bookmarkString +=  expandButton;
     bookmarkString += deleteButton;
     bookmarkString += '</div>';
     return bookmarkString += '</div>';
