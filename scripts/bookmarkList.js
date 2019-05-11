@@ -7,7 +7,7 @@
 /* global store, api, $ */
 
 // eslint-disable-next-line no-unused-vars
-const bookmarkList = (function(){
+const bookmarkList = (function() {
 
   function generateError(message) {
     return `
@@ -21,8 +21,8 @@ const bookmarkList = (function(){
   
 
   function generateBookmarkElement(bookmark) {
-
-    let isRatingHidden = 1.1 === bookmark.rating;
+    console.log(bookmark.rating);
+    let isRatingHidden = '1.1' === bookmark.rating;
     let hideRatingOptionClass = '';
     if (isRatingHidden) {
       hideRatingOptionClass = 'hide-rating';
@@ -104,7 +104,6 @@ const bookmarkList = (function(){
     // }
   
     // render the bookmark list in the DOM
-    console.log('`render` ran');
     const bookmarkListString = generateBookmarkListString(bookmarks);
   
     // insert that HTML into the DOM
@@ -144,7 +143,6 @@ const bookmarkList = (function(){
   function handleToggleDetailed() {
     $('.js-bookmark-list').on('click', '.js-expand-button', event => {
       const id = $(event.currentTarget).closest('.js-bookmark-buttons').attr('data-bookmark-id');
-      console.log(id);
       store.findAndToggleDetailed(id);
       render();
     });
@@ -169,8 +167,7 @@ const bookmarkList = (function(){
   function handleDeleteBookmarkClicked() {
     $('.js-bookmark-list').on('click', '.js-delete-button', event => {
       const id = $(event.currentTarget).closest('.js-bookmark-buttons').attr('data-bookmark-id');
-      console.log('delete ' + id);
-      console.log('delete registered');
+ 
       api.deleteBookmark(id)
         .then(response => {       // was just () =>
           store.findAndDelete(id);
@@ -207,7 +204,6 @@ const bookmarkList = (function(){
   function handleToggleFilter() {
     $('#js-filter-rating').change(event => {
       store.filterValue = event.currentTarget.filterRating.value; 
-      console.log('filter by ' + store.filterValue);
       // store.toggleCheckedFilter();
       render();
     });
@@ -243,15 +239,6 @@ const bookmarkList = (function(){
     handleDeleteBookmarkClicked();
     handleToggleFilter();
     handleCloseError();
-
-    // while not called here, will need to add renders in all of these at end
-    // as well as some sort of handle error logic for invalid user input (perhaps simple alerts?)
-    // and also some way to return custom errors... ensure http or https is entered...
-    // all sorts of invalid user input to take care of. also consider best way to render each
-    // individual bookmark, should probably do ONE <li> for ALL components of a bookmark besides, then another <ul>
-    // for each consecutive next bookmark
-
-    // obviously all sorts of stuff I havent thought of 
   }
 
   // return only publically accessible functions
@@ -265,169 +252,3 @@ const bookmarkList = (function(){
 
 
 
-
-
-
-
-
-// ---------------------------------------------------------------------------------------------------
-
-
-
-
-//   function bindEventListeners() {
-//     handleNewItemSubmit();
-//     handleItemCheckClicked();
-//     handleDeleteItemClicked();
-//     handleEditShoppingItemSubmit();
-//     handleToggleDetailedClicked();
-//     handleToggleFilterClick();
-//     handleShoppingListSearch();
-//     handleItemStartEditing();
-//     handleCloseError();
-//   }
-
-//   // This object contains the only exposed methods from this module:
-//   return {
-//     render: render,
-//     bindEventListeners: bindEventListeners,
-//   };
-// }());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// include functions
-
-// $.fn.extend({
-//   serializeJson: function() {
-//     if (!this.is('input-form')) throw new TypeError('Must run serializeJson on FORM elements only');
-      
-//     const formData = new FormData(this[0]);
-//     const o = {};
-//     formData.forEach((val, field) => {
-//       o[field] = val; 
-//     });
-//     console.log(formData);
-    
-//     return JSON.stringify(o);
-//   }
-// });
-
-// function serializeJson(form) {
-//   const formData = new FormData(form);
-//   const o = {};
-//   formData.forEach((val, name) => o[name] = val);
-//   return JSON.stringify(o);
-// }
-
-// function handleNewBookmarkSubmit() {
-//   console.log('i made it to before handle submit');
-//   $('#js-myForm').submit( function(e) {
-//     e.preventDefault();
-//     const title = e.target.title.value;
-//     const url = e.target.url.value;
-//     const desc = e.target.desc.value;
-//     const rating = e.target.rating.value;
-
-//     api.createBookmark(title, rating, desc, url);
-
-//     console.log('I almost made it to render');
-//     render();
-
-//   });
-//   // const form = document.getElementById('myForm');
-//   // const stringedJson = serializeJson(form);
-//   // console.log(stringedJson);
-// }
-
-
-
-// // DEFINE THESE
-// function handleDeleteBookmarkClicked() {
-
-//   render();
-// }
-
-
-// function handleToggleDetailedClick() {
-
-//   render();
-// }
-
-
-// function handleCloseError() {
-
-//   render();
-// }
-
-// function handleFilterByRating() {
-    
-//   render();
-// }
-
-  
-// function render() {
-//   let bookmarksArr;
-//   console.log('i made it to render');
-//   api.getBookmarks()
-//     // .then( response => {
-//     //   if (!response.ok) {
-//     //     console.log(response.message);
-//     //     throw new Error(response.message);
-//     //   } 
-//     // })
-//     .then( response => { 
-//       response.forEach(bookmark => { 
-//         store.addBookmark( bookmark ); 
-//       } );
-//     } )
-//     .catch(error => error.message ); 
-
-//   // clear cache if not empty
-//   $('.results').empty('');
-
-//   // print all bookmarks
-//   for (let i = 0; i < store.bookmarks.length; i++) {
-//     $('.results').append(
-//       `<ul class="js-bookmark-results">
-//       <ul><h4>${store.bookmarks[i].title}</h4>
-//         <li>${store.bookmarks[i].rating}</li>
-//         <li class="hidden">${store.bookmarks[i].desc}</li>
-//         <li class="hidden"><a href="https://google.com" class="hidden">${store.bookmarks[i].link}</a></li>
-//       </ul>
-//     </ul>`
-//     );
-      
-    
-//   }
-        
-    
-    
-// }
-
-
-// // Invoke event listeners
-
-// function bindEventListeners() {
-
-// handleNewItemSubmit();
-// handleItemCheckClicked();
-// handleDeleteItemClicked();
-// // handleEditShoppingItemSubmit();
-// handleToggleDetailedClicked();
-// handleToggleFilterClick();
-// handleShoppingListSearch();
-// handleItemStartEditing();
-// handleCloseError();

@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+  margin: auto;
+}
+
+body {
+  width: 100%;
+  height: auto;
+  min-width: 640px;
+}
+
+.main {
+  margin: auto;
+  text-align: center;
+  
+}
+
+.addForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
+h1 {
+  padding: 15px;
+  text-align: center;
+}
+
+h3 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+
+
+#js-filter-rating {
+  padding-top: 30px; 
+}
+
+#js-add-bookmark {
+  visibility: hidden;
+}
+
+.js-bookmark-list {
+  padding-top: 20px;
+  list-style-type: none;
+}
+
+.bookmark-container {
+  padding-bottom: 35px;
+}
+
+.bookmark-container > p {
+  padding: none;
+  margin: none;
+  
+}
+
+button {
+  display: inline-block;
+}
+
+.hide-rating {
+  visibility: hidden;
+}
+

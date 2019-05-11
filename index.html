@@ -6,19 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bookmark List</title>
   <meta name="description" content="A personal list for you to manage a list of your bookmarks, including titles, ratings, descriptions, and links.">
+  <link rel="stylesheet" href="style/main.css">
 </head>
 <body>
-  <div class="main">
-
+  
     <header role="banner"><h1>My Bookmarks</h1></header>
 
+    <main role="main" class="main">
+
     <h3 role="banner">Add bookmarks or filter your list</h3>
-    <form id="js-add-bookmark" method="get">
+    <!-- <form id="js-add-bookmark" method="get">
       <button name="add-bookmark" type="button" value="add-bookmark">Add Bookmark</button>
-    </form>
+    </form> -->
     
 
-    <form class="hidden" id="js-myForm" name="input-form" action="submit">
+    <form class="addForm" id="js-myForm" role="form" name="input-form" action="submit">
 
       <label for="title">Title:</label>
       <input type="text" name="title" id="js-title-input" required>
@@ -26,7 +28,7 @@
       <label for="url">URL:</label>
       <input type="text" name="url" id="js-hyperlink-input" required>
 
-      <label for="description">Information:</label>
+      <label for="description">Description:</label>
       <input type="text" name="desc" id="js-description-input" >
 
       <select name="rating" id="js-rating" >
@@ -52,12 +54,11 @@
      </select>
     </form>
 
-  <section class="results">
+  <section role="region" class="results">
     <ul class="js-bookmark-list">
       
     </ul>
   </section>
-
   </div>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>

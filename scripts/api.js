@@ -114,8 +114,7 @@ const api = (function() {
    * !!!  NEED TO RECEIVE ID FROM bookmarkList.js which it listens for when user presses delete !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    */
   function deleteBookmark(id) { 
-    console.log('delete this id in api : ' + id);
-    // ALL I NEED?? IS THIS GOING TO CORRECTLY DELETE FROM STORE?
+
     try {
       return fetchHandler(BASE_URL + '/' + id, { method: 'DELETE' }); // added a return!, was preventing delete from working
       // eslint-disable-next-line no-undef
