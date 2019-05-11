@@ -21,6 +21,12 @@ const bookmarkList = (function(){
   
 
   function generateBookmarkElement(bookmark) {
+
+    let isRatingHidden = 1.1 === bookmark.rating;
+    let hideRatingOptionClass = '';
+    if (isRatingHidden) {
+      hideRatingOptionClass = 'hide-rating';
+    }
     // let expandState = 'Expand details';
     let expandButton = '<button class="js-expand-button">Details</button>';
     let deleteButton = '<button class="js-delete-button">Delete</button>';
@@ -32,7 +38,7 @@ const bookmarkList = (function(){
       bookmarkString +=
         `<li class="js-detailed-bookmark">
           <p>${bookmark.title}</p>
-          <p>${bookmark.rating} Star</p>
+          <p class="${hideRatingOptionClass}">${bookmark.rating} Star</p>
           <p>${bookmark.desc}</p>
           <p><a href="${bookmark.url}">Visit Site</a></p>
         </li>`;
@@ -40,7 +46,7 @@ const bookmarkList = (function(){
       bookmarkString += 
           `<li class="js-undetailed-bookmark">
             <p>${bookmark.title}</p>
-            <p>${bookmark.rating} Star</p>
+            <p class="${hideRatingOptionClass}">${bookmark.rating} Star</p>
           </li>`;
     }
 
