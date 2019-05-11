@@ -75,7 +75,7 @@ const api = (function() {
   // url, string, required min 5 length and include protocol (http/https)
   // desc	string, optional Min 1 length
   // rating, number, optional between 1 and 5
-  function createBookmark(title, rating, desc, url) {
+  function createBookmark(newObj) {
     
     // ^^ will probably need to take a Bookmark parameter and then extract out Id to append to url
 
@@ -85,17 +85,27 @@ const api = (function() {
     const headersObj = new Headers( {
       'content-type' : 'application/json',
     } );
-     
+    
+    // let sendBody;
+
     const postBookmarkURL = BASE_URL;
 
-    const sendBody = {
-      title,
-      rating,
-      desc,
-      url, 
-    };
+    // if (rating === 'none') {
+    //   sendBody = {
+    //     title,
+    //     desc,
+    //     url, 
+    //   };
+    // } else {
+    //   sendBody = {
+    //     title,
+    //     rating,
+    //     desc,
+    //     url, 
+    //   };
+    
 
-    const body = JSON.stringify(sendBody);
+    const body = JSON.stringify(newObj);
 
     // THIS IS A TEST
     // eslint-disable-next-line no-undef

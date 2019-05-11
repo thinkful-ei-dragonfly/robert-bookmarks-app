@@ -22,10 +22,19 @@ const bookmarkList = (function() {
 
   function generateBookmarkElement(bookmark) {
     console.log(bookmark.rating);
-    let isRatingHidden = '1.1' === bookmark.rating;
+    
+
+    // let isRatingHidden = '1.1' === bookmark.rating;
     let hideRatingOptionClass = '';
-    if (isRatingHidden) {
-      hideRatingOptionClass = 'hide-rating';
+    let hideDescOptionClass = '';
+    if (bookmark.rating === null) {
+      console.log('enteredNull');
+      hideRatingOptionClass = 'hide-field';
+    }
+
+    console.log('before null' + bookmark.desc);
+    if (bookmark.desc === null) {
+      hideDescOptionClass = 'hide-field';
     }
     // let expandState = 'Expand details';
     let expandButton = '<button class="js-expand-button">Details</button>';
@@ -39,7 +48,7 @@ const bookmarkList = (function() {
         `<li class="js-detailed-bookmark">
           <p>${bookmark.title}</p>
           <p class="${hideRatingOptionClass}">${bookmark.rating} Star</p>
-          <p>${bookmark.desc}</p>
+          <p class="${hideDescOptionClass}">${bookmark.desc}</p>
           <p><a href="${bookmark.url}">Visit Site</a></p>
         </li>`;
     } else {
@@ -119,14 +128,30 @@ const bookmarkList = (function() {
       const url = e.target.url.value;
       const desc = e.target.desc.value;
       const rating = e.target.rating.value;
-    
-      api.createBookmark(title, rating, desc, url)
+
+      console.log(desc);
+      console.log(rating);
+
+      const newObj = {};
+      if (desc !== "") {
+        console.log('madeDesc');
+        newObj['desc'] = desc;
+      }
+      if (rating !== "") {
+        console.log('made rating');
+        newObj['rating'] = rating;
+      }
+
+      newObj['title'] = title;
+      newObj['url'] = url;
+
+      api.createBookmark(newObj)
         .then((newBookmark) => {
           store.addBookmark(newBookmark);
           render();
         })
         .catch((err) => {
-          store.setError(err.message);
+          store.setError(err); // changing from err.message
           renderError();
         });
     });

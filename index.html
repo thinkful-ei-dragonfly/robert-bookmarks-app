@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="style/main.css">
 </head>
 <body>
-  
+    
+    <div class ="error-container"> </div>
+
     <header role="banner"><h1>My Bookmarks</h1></header>
 
     <main role="main" class="main">
@@ -31,8 +33,9 @@
       <label for="description">Description:</label>
       <input type="text" name="desc" id="js-description-input" >
 
+      <!-- starting to mess with no rating value options -->
       <select name="rating" id="js-rating" >
-       <option value="1.1">Rating</option>
+       <option></option>
        <option value="1">1 star</option>
        <option value="2">2 stars</option>
        <option value="3">3 stars</option>
@@ -56,10 +59,12 @@
 
   <section role="region" class="results">
     <ul class="js-bookmark-list">
-      
+        
     </ul>
   </section>
   </div>
+
+  
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
