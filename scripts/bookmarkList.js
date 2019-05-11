@@ -21,18 +21,14 @@ const bookmarkList = (function() {
   
 
   function generateBookmarkElement(bookmark) {
-    console.log(bookmark.rating);
     
-
     // let isRatingHidden = '1.1' === bookmark.rating;
     let hideRatingOptionClass = '';
     let hideDescOptionClass = '';
     if (bookmark.rating === null) {
-      console.log('enteredNull');
       hideRatingOptionClass = 'hide-field';
     }
 
-    console.log('before null' + bookmark.desc);
     if (bookmark.desc === null) {
       hideDescOptionClass = 'hide-field';
     }
@@ -40,7 +36,7 @@ const bookmarkList = (function() {
     let expandButton = '<button class="js-expand-button">Details</button>';
     let deleteButton = '<button class="js-delete-button">Delete</button>';
 
-    const detailedBtnStatus = bookmark.isDisplayDetailed ? 'disabled' : '';
+    // const detailedBtnStatus = bookmark.isDisplayDetailed ? 'disabled' : '';
 
     let bookmarkString = `<div class="bookmark-container" data-bookmark-id="${bookmark.id}">`;
     if (bookmark.isDisplayDetailed) {
@@ -129,16 +125,11 @@ const bookmarkList = (function() {
       const desc = e.target.desc.value;
       const rating = e.target.rating.value;
 
-      console.log(desc);
-      console.log(rating);
-
       const newObj = {};
       if (desc !== "") {
-        console.log('madeDesc');
         newObj['desc'] = desc;
       }
       if (rating !== "") {
-        console.log('made rating');
         newObj['rating'] = rating;
       }
 
