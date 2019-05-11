@@ -164,7 +164,7 @@ const bookmarkList = (function(){
       console.log('delete ' + id);
       console.log('delete registered');
       api.deleteBookmark(id)
-        .then(() => {
+        .then(response => {       // was just () =>
           store.findAndDelete(id);
           render();
         })

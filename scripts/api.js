@@ -5,7 +5,7 @@
 const api = (function() {
   
   // base URL for bookmarks server end point
-  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/robertwnewtry2/bookmarks';
+  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/robertwnewtry3/bookmarks';
 
   // returns a parsed json if fetch is valid, otherwise standardizes the handling of errors for all requests 
   function fetchHandler(...params) {
@@ -114,10 +114,10 @@ const api = (function() {
    * !!!  NEED TO RECEIVE ID FROM bookmarkList.js which it listens for when user presses delete !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    */
   function deleteBookmark(id) { 
-
+    console.log('delete this id in api : ' + id);
     // ALL I NEED?? IS THIS GOING TO CORRECTLY DELETE FROM STORE?
     try {
-      fetchHandler(BASE_URL + '/' + id, { method: 'DELETE' });
+      return fetchHandler(BASE_URL + '/' + id, { method: 'DELETE' }); // added a return!, was preventing delete from working
       // eslint-disable-next-line no-undef
     // eslint-disable-next-line no-undef` 
     } catch (e) {
