@@ -197,8 +197,9 @@ const bookmarkList = (function(){
   // }
   
   function handleToggleFilter() {
-    $('.js-filter-rating').submit(event => {
-      store.filterValue = event.target.filterRating.value; 
+    $('#js-filter-rating').change(event => {
+      store.filterValue = event.currentTarget.filterRating.value; 
+      console.log('filter by ' + store.filterValue);
       // store.toggleCheckedFilter();
       render();
     });
