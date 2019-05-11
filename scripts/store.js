@@ -43,7 +43,11 @@ const store = (function(){
   };
 
   const setError = function(errorMessage) {
-    this.error = errorMessage.message;
+    if (errorMessage === null) {
+      this.error = null;
+    } else {
+      this.error = errorMessage.message;
+    }
   };
 
   // MIGHT NOT NEED
