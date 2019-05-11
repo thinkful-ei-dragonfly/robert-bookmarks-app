@@ -34,7 +34,7 @@ const bookmarkList = (function(){
           <p>${bookmark.title}</p>
           <p>${bookmark.rating} Star</p>
           <p>${bookmark.desc}</p>
-          <p>${bookmark.url}</p>
+          <p><a href="${bookmark.url}">Visit Site</a></p>
         </li>`;
     } else {
       bookmarkString += 
